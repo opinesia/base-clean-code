@@ -225,6 +225,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.0"
+  feature_ui:
+    dependency: "direct main"
+    description:
+      path: "feature/feature_ui"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   file:
     dependency: transitive
     description:
@@ -661,5 +668,5 @@ packages:
     source: hosted
     version: "3.1.0"
 sdks:
-  dart: ">=2.17.0-0 <3.0.0"
+  dart: ">=2.17.3 <3.0.0"
   flutter: ">=1.17.0"
