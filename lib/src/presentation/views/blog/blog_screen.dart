@@ -8,7 +8,12 @@ import 'package:flutter_bootstrap/flutter_bootstrap.dart';
 
 class BlogScreen extends StatelessWidget {
   final BlogBloc bloc;
-  BlogScreen({Key? key, required this.bloc}) : super(key: key) {
+  BlogScreen({
+    Key? key,
+    required this.bloc,
+  }) : super(
+          key: key,
+        ) {
     bloc.add(GetBlog());
   }
 
@@ -17,12 +22,17 @@ class BlogScreen extends StatelessWidget {
     TextEditingController searchInput = TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        actionsIconTheme: const IconThemeData(color: Colors.black),
+        actionsIconTheme: const IconThemeData(
+          color: Colors.black,
+        ),
         backgroundColor: Colors.white,
         elevation: 0.0,
         title: const Text(
           'Blog',
-          style: TextStyle(color: Colors.amber, fontWeight: FontWeight.w800),
+          style: TextStyle(
+            color: Colors.amber,
+            fontWeight: FontWeight.w800,
+          ),
         ),
       ),
       body: BlocProvider(
@@ -51,7 +61,9 @@ class BlogScreen extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                     onChanged: (value) {
-                      bloc.add(SearchBlog(searchValue: value, allBlogs: blogs));
+                      bloc.add(
+                        SearchBlog(searchValue: value, allBlogs: blogs),
+                      );
                     },
                     decoration: InputDecoration(
                       focusColor: Colors.white,
@@ -64,9 +76,13 @@ class BlogScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.amber, width: 1.0),
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(
+                          color: Colors.amber,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          10.0,
+                        ),
                       ),
                       fillColor: Colors.amber,
                       hintText: "Search by tittle",
@@ -76,13 +92,17 @@ class BlogScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 80),
                   child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: ConstrainedBox(
-                          constraints: const BoxConstraints(
-                            minHeight: 500,
-                          ),
-                          child: gridBootstrap(
-                              blogs: searchBlogs, context: context))),
+                    scrollDirection: Axis.vertical,
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        minHeight: 500,
+                      ),
+                      child: gridBootstrap(
+                        blogs: searchBlogs,
+                        context: context,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             );
@@ -94,31 +114,34 @@ class BlogScreen extends StatelessWidget {
 
   Widget gridBootstrap(
       {required List<BlogEntity> blogs, required BuildContext context}) {
-    return BootstrapContainer(fluid: true, children: [
-      ...List.generate(
-        blogs.length,
-        (index) => BootstrapCol(
-          sizes: 'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3',
-          child: Padding(
-            padding: const EdgeInsets.only(top: 12, bottom: 12),
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailWidget(
-                      blogEntity: blogs[index],
+    return BootstrapContainer(
+      fluid: true,
+      children: [
+        ...List.generate(
+          blogs.length,
+          (index) => BootstrapCol(
+            sizes: 'col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3',
+            child: Padding(
+              padding: const EdgeInsets.only(top: 12, bottom: 12),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailWidget(
+                        blogEntity: blogs[index],
+                      ),
                     ),
-                  ),
-                );
-              },
-              child: ScoreAndResultScoreCard(
-                blog: blogs[index],
+                  );
+                },
+                child: ScoreAndResultScoreCard(
+                  blog: blogs[index],
+                ),
               ),
             ),
           ),
         ),
-      ),
-    ]);
+      ],
+    );
   }
 }
